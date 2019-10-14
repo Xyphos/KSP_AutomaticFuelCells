@@ -1,4 +1,4 @@
-# KSP_AutomaticFuelCells
+# Automatic Fuel Cells
 KSP plugin, Requires **Advanced Tweakables** game setting to be enabled.
 
 The default behavior for Fuel Cells is to run continuously, constantly draining fuel to generate ElectricCharge.
