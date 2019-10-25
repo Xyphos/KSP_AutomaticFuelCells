@@ -23,6 +23,8 @@
 
 // ReSharper disable UnusedMember.Global
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -33,6 +35,8 @@ namespace XyphosAerospace
 {
   public class AutomaticFuelCell : PartModule
   {
+    private const string GroupName = "XyphosAerospace.AutomaticFuelCell";
+
     private const float MinThresholdPercent = 15.0f;
     private const float MaxThresholdPercent = 85.0f;
 
@@ -54,11 +58,14 @@ namespace XyphosAerospace
         enabledText           = "Automatic"
       )]
     [KSPField(
-        advancedTweakable = true,
-        isPersistant      = true,
-        guiActive         = true,
-        guiActiveEditor   = true,
-        guiName           = "Operation"
+        advancedTweakable   = true,
+        isPersistant        = true,
+        guiActive           = true,
+        guiActiveEditor     = true,
+        guiName             = "Operation",
+        groupDisplayName    = "Automatic Fuel Cell",
+        groupName           = GroupName,
+        groupStartCollapsed = true
       )]
     public bool Automatic = GameSettings.ADVANCED_TWEAKABLES;
 
@@ -75,7 +82,8 @@ namespace XyphosAerospace
         guiActiveEditor   = true,
         guiName           = "ElectricCharge",
         guiFormat         = "F2",
-        guiUnits          = "%"
+        guiUnits          = "%",
+        groupName         = GroupName
       )]
     public double CurrentCharge;
 
@@ -132,13 +140,14 @@ namespace XyphosAerospace
         guiActiveEditor   = true,
         guiName           = "Automatic Threshold %",
         guiFormat         = "F0",
-        guiUnits          = "%"
+        guiUnits          = "%",
+        groupName         = GroupName
       )]
     public Vector2 Thresholds = new Vector2(
         x: MinThresholdPercent,
         y: MaxThresholdPercent
       );
-
+    
 
     /// <summary>
     ///   For debugging use only.
@@ -281,5 +290,11 @@ namespace XyphosAerospace
       }
       catch (Exception e) { DebugLog(m: e); }
     }
+
+    /// <summary>
+    ///   Gets the information.
+    /// </summary>
+    /// <returns></returns>
+    public override string GetInfo() => "Able to automatically toggle itself on and off as needed.";
   }
 }
